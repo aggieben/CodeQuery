@@ -1,0 +1,17 @@
+source https://api.nuget.org/v3/index.json
+
+framework: >= net461
+nuget Argu
+nuget FSharp.Core
+nuget Microsoft.Build.Locator
+nuget Microsoft.CodeAnalysis
+nuget Microsoft.CodeAnalysis.CSharp
+nuget Microsoft.CodeAnalysis.CSharp.Workspaces
+nuget Microsoft.CodeAnalysis.Workspaces.Common
+nuget Microsoft.Extensions.Configuration
+nuget Microsoft.Net.Compilers
+
+group Build
+source https://api.nuget.org/v3/index.json
+
+nuget FAKE
