@@ -1,0 +1,7 @@
+FSharp.Core
+Argu
+Microsoft.Build.Locator
+Microsoft.CodeAnalysis
+Microsoft.CodeAnalysis.CSharp
+Microsoft.CodeAnalysis.CSharp.Workspaces
+Microsoft.CodeAnalysis.Workspaces.Common

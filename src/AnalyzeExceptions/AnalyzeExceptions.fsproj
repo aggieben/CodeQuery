@@ -5,10 +5,15 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Project.fs" />
+    <Compile Include="ExceptionHandler.fs" />
+    <Compile Include="Program.fs" />
     <None Include="App.config" />
-    <Compile Include="Projects.fs" />
-    <Compile Include="Commands.fs" />
-    <Compile Include="CodeQuery.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build" Version="15.7.179">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4DE844DA-9076-400A-83B1-81914D7CC47F}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CodeQuery", "src\CodeQuery\CodeQuery.fsproj", "{5F2EED14-1D97-4AD5-A4DC-7461540F6814}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "AnalyzeExceptions", "src\AnalyzeExceptions\AnalyzeExceptions.fsproj", "{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -32,8 +34,21 @@ Global
 		{5F2EED14-1D97-4AD5-A4DC-7461540F6814}.Release|x64.Build.0 = Release|x64
 		{5F2EED14-1D97-4AD5-A4DC-7461540F6814}.Release|x86.ActiveCfg = Release|x86
 		{5F2EED14-1D97-4AD5-A4DC-7461540F6814}.Release|x86.Build.0 = Release|x86
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|x64.Build.0 = Release|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5F2EED14-1D97-4AD5-A4DC-7461540F6814} = {4DE844DA-9076-400A-83B1-81914D7CC47F}
+		{6B8F108E-2A39-4FED-978A-BABB1C80C5FE} = {4DE844DA-9076-400A-83B1-81914D7CC47F}
 	EndGlobalSection
 EndGlobal
