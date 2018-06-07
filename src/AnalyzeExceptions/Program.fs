@@ -54,7 +54,7 @@ let main argv =
 
     for (cc,symbol) in ccLocations do
         let flps = cc.GetLocation().GetLineSpan()
-        let symbolString = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+        let symbolString = symbol.ToString()
         printfn "%s | %s:%d" symbolString flps.Path flps.StartLinePosition.Line
 
     0 // return an integer exit code
