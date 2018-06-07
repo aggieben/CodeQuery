@@ -52,11 +52,9 @@ let main argv =
 
     printfn "found %d relevant catch expressions" (Seq.length ccLocations)
 
-    for (cc,symbolInfo) in ccLocations do
+    for (cc,symbol) in ccLocations do
         let flps = cc.GetLocation().GetLineSpan()
-        let symbolString = match symbolInfo.Symbol with
-                           | null -> "(no symbol information)"
-                           | s -> s.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+        let symbolString = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
         printfn "%s | %s:%d" symbolString flps.Path flps.StartLinePosition.Line
 
     0 // return an integer exit code

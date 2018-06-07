@@ -36,12 +36,9 @@ let hasCatchClause exceptionType (trySyntax:TryStatementSyntax) =
     |> Seq.filter (isExceptionCatchClause exceptionType)
     |> (Seq.isEmpty >> not)
 
-let rec getContainingSymbol (compilation:Compilation) (syntaxNode:SyntaxNode) =
-
-    let symbolInfo = compilation.GetSemanticModel(syntaxNode.SyntaxTree).GetSymbolInfo(syntaxNode)
-    match symbolInfo with
-    | symbolInfo when isNull symbolInfo.Symbol -> getContainingSymbol compilation syntaxNode.Parent
-    | _ -> symbolInfo
+let getContainingSymbol (compilation:Compilation) (syntaxNode:SyntaxNode) =
+    let model = compilation.GetSemanticModel(syntaxNode.SyntaxTree)
+    model.GetEnclosingSymbol(syntaxNode.SpanStart)
 
 /// Finds try statements that have catch clauses that handle the includeExn exception type, but not the excludeExn exception type if provided.
 let analyzeHandlers includeExn excludeExn (project:Project) = async {
