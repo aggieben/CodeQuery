@@ -1,79 +1,39 @@
-// --------------------------------------------------------------------------------------
-// FAKE build script
-// --------------------------------------------------------------------------------------
+#load ".fake/build.fsx/intellisense.fsx"
+open Fake.Core
+open Fake.DotNet
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.IO.Globbing.Operators
+open Fake.Core.TargetOperators
 
-#r "./packages/build/FAKE/tools/FakeLib.dll"
-
-open Fake
-open System
-
-// --------------------------------------------------------------------------------------
-// Build variables
-// --------------------------------------------------------------------------------------
-
-let buildDir  = "./build/"
-let appReferences = !! "/**/*.fsproj"
-let dotnetcliVersion = "2.0.2"
-let mutable dotnetExePath = "dotnet"
-
-// --------------------------------------------------------------------------------------
-// Helpers
-// --------------------------------------------------------------------------------------
-
-let run' timeout cmd args dir =
-    if execProcess (fun info ->
-        info.FileName <- cmd
-        if not (String.IsNullOrWhiteSpace dir) then
-            info.WorkingDirectory <- dir
-        info.Arguments <- args
-    ) timeout |> not then
-        failwithf "Error while running '%s' with args: %s" cmd args
-
-let run = run' System.TimeSpan.MaxValue
-
-let runDotnet workingDir args =
-    let result =
-        ExecProcess (fun info ->
-            info.FileName <- dotnetExePath
-            info.WorkingDirectory <- workingDir
-            info.Arguments <- args) TimeSpan.MaxValue
-    if result <> 0 then failwithf "dotnet %s failed" args
-
-// --------------------------------------------------------------------------------------
-// Targets
-// --------------------------------------------------------------------------------------
-
-Target "Clean" (fun _ ->
-    CleanDirs [buildDir]
+Target.create "Clean" (fun _ ->
+    !! "src/**/bin"
+    ++ "src/**/obj"
+    |> Shell.cleanDirs 
 )
 
-Target "InstallDotNetCLI" (fun _ ->
-    dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
+Target.create "Build" (fun _ ->
+    !! "src/**/*.*proj"
+    -- "src/CodeQuery/CodeQuery.fsproj" // this project is broken at the moment.
+    |> Seq.iter (DotNet.build id)
 )
 
-Target "Restore" (fun _ ->
-    appReferences
-    |> Seq.iter (fun p ->
-        let dir = System.IO.Path.GetDirectoryName p
-        runDotnet dir "restore"
-    )
+Target.create "AnalyzeExceptions" (fun _ ->
+    "src/AnalyzeExceptions/AnalyzeExceptions.fsproj"
+    |> DotNet.publish (fun c -> 
+        { c with
+            OutputPath = Some (__SOURCE_DIRECTORY__ @@ "build" @@ "AnalyzeExceptions")
+        })
 )
 
-Target "Build" (fun _ ->
-    appReferences
-    |> Seq.iter (fun p ->
-        let dir = System.IO.Path.GetDirectoryName p
-        runDotnet dir "build"
-    )
-)
-
-// --------------------------------------------------------------------------------------
-// Build order
-// --------------------------------------------------------------------------------------
+Target.create "All" ignore
 
 "Clean"
-  ==> "InstallDotNetCLI"
-  ==> "Restore"
   ==> "Build"
+  ==> "All"
 
-RunTargetOrDefault "Build"
+"Clean"
+  ==> "Build"
+  ==> "AnalyzeExceptions"
+
+Target.runOrDefault "AnalyzeExceptions"

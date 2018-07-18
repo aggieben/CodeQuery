@@ -1,6 +1,5 @@
 source https://api.nuget.org/v3/index.json
-
-framework: >= net461
+framework >= net47
 nuget Argu
 nuget FSharp.Core
 nuget Microsoft.Build.Locator
@@ -11,7 +10,9 @@ nuget Microsoft.CodeAnalysis.Workspaces.Common
 nuget Microsoft.Extensions.Configuration
 nuget Microsoft.Net.Compilers
 
+// [ FAKE GROUP ]
 group Build
-source https://api.nuget.org/v3/index.json
-
-nuget FAKE
+    source https://api.nuget.org/v3/index.json
+    nuget Fake.DotNet.Cli
+    nuget Fake.IO.FileSystem
+    nuget Fake.Core.Target
