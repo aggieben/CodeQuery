@@ -42,7 +42,7 @@ let main argv =
     printfn "Found %d app projects" (Seq.length appProjects)
 
     let includeExn = parsedArgs.GetResult(IncludeException)
-    let excludeExn = parsedArgs.GetResult(ExcludeException)
+    let excludeExn = parsedArgs.GetResult(ExcludeException, None)
 
     let ccLocations = nonTestProjects 
                       |> Seq.map (analyzeHandlers includeExn excludeExn)
